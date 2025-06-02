@@ -1,0 +1,10 @@
+[project]
+name = "catanllm"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "catanatron>=3.2.1",
+    "unsloth>=2025.5.9",
+]
