@@ -1,0 +1,1156 @@
+2025-06-07 02:06:15,418 - GAME STARTED at 2025-06-07 02:06:15.418945
+2025-06-07 02:06:15,419 - Players: ['BLUE', 'RED', 'ORANGE', 'WHITE']
+2025-06-07 02:06:15,419 - Max turns limit: 8
+2025-06-07 02:06:15,419 - 
+==================================================
+2025-06-07 02:06:15,419 - TURN 1 - BLUE's turn
+2025-06-07 02:06:15,419 - ==================================================
+2025-06-07 02:06:15,419 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 0
+Current player: BLUE
+
+=== PLAYER STATUS ===
+>>> BLUE: 0 VP (0 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    RED: 0 VP (0 actual), 0 resources
+    ORANGE: 0 VP (0 actual), 0 resources
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | no roads | adjacent to tile IDs: 1, 7, 18
+Node 8: Empty | neighbors: [7, 9, 27] | no roads | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: Empty | neighbors: [30, 32, 64] | no roads | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | no roads | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: Empty | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+No roads built yet
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 54 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 90 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 0 settlements, 0 cities, 0 roads
+RED: 0 settlements, 0 cities, 0 roads
+ORANGE: 0 settlements, 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:15,419 - 
+==================================================
+2025-06-07 02:06:15,419 - TURN 2 - BLUE's turn
+2025-06-07 02:06:15,419 - ==================================================
+2025-06-07 02:06:15,420 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 0
+Current player: BLUE
+
+=== PLAYER STATUS ===
+>>> BLUE: 1 VP (1 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    RED: 0 VP (0 actual), 0 resources
+    ORANGE: 0 VP (0 actual), 0 resources
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | no roads | adjacent to tile IDs: 1, 7, 18
+Node 8: Empty | neighbors: [7, 9, 27] | no roads | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | no roads | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | no roads | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: Empty | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+No roads built yet
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 53 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 90 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 0 roads
+RED: 0 settlements, 0 cities, 0 roads
+ORANGE: 0 settlements, 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:15,420 - 
+==================================================
+2025-06-07 02:06:15,420 - TURN 3 - RED's turn
+2025-06-07 02:06:15,420 - ==================================================
+2025-06-07 02:06:15,420 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 1
+Current player: RED
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+>>> RED: 0 VP (0 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    ORANGE: 0 VP (0 actual), 0 resources
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | no roads | adjacent to tile IDs: 1, 7, 18
+Node 8: Empty | neighbors: [7, 9, 27] | no roads | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: Empty | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 53 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 89 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 0 settlements, 0 cities, 0 roads
+ORANGE: 0 settlements, 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:15,420 - 
+LLM PLAYER Qwen3-8B is making a decision...
+2025-06-07 02:06:15,420 - 
+AVAILABLE ACTIONS:
+=== AVAILABLE ACTIONS ===
+0: Build settlement at node 0 (node 0)
+1: Build settlement at node 1 (node 1)
+2: Build settlement at node 2 (node 2)
+3: Build settlement at node 3 (node 3)
+4: Build settlement at node 4 (node 4)
+5: Build settlement at node 5 (node 5)
+6: Build settlement at node 6 (node 6)
+7: Build settlement at node 7 (node 7)
+8: Build settlement at node 8 (node 8)
+9: Build settlement at node 9 (node 9)
+10: Build settlement at node 10 (node 10)
+11: Build settlement at node 11 (node 11)
+12: Build settlement at node 12 (node 12)
+13: Build settlement at node 13 (node 13)
+14: Build settlement at node 14 (node 14)
+15: Build settlement at node 15 (node 15)
+16: Build settlement at node 16 (node 16)
+17: Build settlement at node 17 (node 17)
+18: Build settlement at node 18 (node 18)
+19: Build settlement at node 19 (node 19)
+20: Build settlement at node 20 (node 20)
+21: Build settlement at node 21 (node 21)
+22: Build settlement at node 22 (node 22)
+23: Build settlement at node 23 (node 23)
+24: Build settlement at node 24 (node 24)
+25: Build settlement at node 25 (node 25)
+26: Build settlement at node 26 (node 26)
+27: Build settlement at node 27 (node 27)
+28: Build settlement at node 28 (node 28)
+29: Build settlement at node 29 (node 29)
+30: Build settlement at node 33 (node 33)
+31: Build settlement at node 34 (node 34)
+32: Build settlement at node 35 (node 35)
+33: Build settlement at node 36 (node 36)
+34: Build settlement at node 37 (node 37)
+35: Build settlement at node 38 (node 38)
+36: Build settlement at node 39 (node 39)
+37: Build settlement at node 40 (node 40)
+38: Build settlement at node 41 (node 41)
+39: Build settlement at node 42 (node 42)
+40: Build settlement at node 43 (node 43)
+41: Build settlement at node 44 (node 44)
+42: Build settlement at node 45 (node 45)
+43: Build settlement at node 46 (node 46)
+44: Build settlement at node 47 (node 47)
+45: Build settlement at node 48 (node 48)
+46: Build settlement at node 49 (node 49)
+47: Build settlement at node 50 (node 50)
+48: Build settlement at node 51 (node 51)
+49: Build settlement at node 52 (node 52)
+50: Build settlement at node 53 (node 53)
+2025-06-07 02:06:29,891 - 
+ACTION TAKEN: Action(color=<Color.RED: 'RED'>, action_type=<ActionType.BUILD_SETTLEMENT: 'BUILD_SETTLEMENT'>, value=8)
+2025-06-07 02:06:29,891 - 
+LLM OUTPUT:
+
+2025-06-07 02:06:29,891 - 
+==================================================
+2025-06-07 02:06:29,891 - TURN 4 - RED's turn
+2025-06-07 02:06:29,891 - ==================================================
+2025-06-07 02:06:29,892 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 1
+Current player: RED
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+>>> RED: 1 VP (1 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    ORANGE: 0 VP (0 actual), 0 resources
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | no roads | adjacent to tile IDs: 1, 7, 18
+Node 8: RED SETTLEMENT | neighbors: [7, 9, 27] | no roads | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: Empty | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 52 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 89 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 1 settlements at nodes [8], 0 cities, 0 roads
+ORANGE: 0 settlements, 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:29,892 - 
+LLM PLAYER Qwen3-8B is making a decision...
+2025-06-07 02:06:29,892 - 
+AVAILABLE ACTIONS:
+=== AVAILABLE ACTIONS ===
+0: Build road connecting nodes 8 ↔ 9
+1: Build road connecting nodes 8 ↔ 27
+2: Build road connecting nodes 7 ↔ 8
+2025-06-07 02:06:43,913 - 
+ACTION TAKEN: Action(color=<Color.RED: 'RED'>, action_type=<ActionType.BUILD_ROAD: 'BUILD_ROAD'>, value=(7, 8))
+2025-06-07 02:06:43,913 - 
+LLM OUTPUT:
+
+2025-06-07 02:06:43,913 - 
+==================================================
+2025-06-07 02:06:43,913 - TURN 5 - ORANGE's turn
+2025-06-07 02:06:43,913 - ==================================================
+2025-06-07 02:06:43,914 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 2
+Current player: ORANGE
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+    RED: 1 VP (1 actual), 0 resources
+>>> ORANGE: 0 VP (0 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | roads: road to node 8 (RED) | adjacent to tile IDs: 1, 7, 18
+Node 8: RED SETTLEMENT | neighbors: [7, 9, 27] | roads: road to node 7 (RED) | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: Empty | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: RED connecting nodes 7 ↔ 8
+Road: RED connecting nodes 8 ↔ 7
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 52 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 88 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 1 settlements at nodes [8], 0 cities, 2 roads
+ORANGE: 0 settlements, 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:43,914 - 
+==================================================
+2025-06-07 02:06:43,914 - TURN 6 - ORANGE's turn
+2025-06-07 02:06:43,914 - ==================================================
+2025-06-07 02:06:43,915 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 2
+Current player: ORANGE
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+    RED: 1 VP (1 actual), 0 resources
+>>> ORANGE: 1 VP (1 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+    WHITE: 0 VP (0 actual), 0 resources
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | roads: road to node 8 (RED) | adjacent to tile IDs: 1, 7, 18
+Node 8: RED SETTLEMENT | neighbors: [7, 9, 27] | roads: road to node 7 (RED) | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: ORANGE SETTLEMENT | neighbors: [39, 42, 75] | no roads | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | no roads | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: RED connecting nodes 7 ↔ 8
+Road: RED connecting nodes 8 ↔ 7
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 51 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 88 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 1 settlements at nodes [8], 0 cities, 2 roads
+ORANGE: 1 settlements at nodes [41], 0 cities, 0 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:43,915 - 
+==================================================
+2025-06-07 02:06:43,915 - TURN 7 - WHITE's turn
+2025-06-07 02:06:43,915 - ==================================================
+2025-06-07 02:06:43,916 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 3
+Current player: WHITE
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+    RED: 1 VP (1 actual), 0 resources
+    ORANGE: 1 VP (1 actual), 0 resources
+>>> WHITE: 0 VP (0 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | roads: road to node 8 (RED) | adjacent to tile IDs: 1, 7, 18
+Node 8: RED SETTLEMENT | neighbors: [7, 9, 27] | roads: road to node 7 (RED) | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: ORANGE SETTLEMENT | neighbors: [39, 42, 75] | roads: road to node 42 (ORANGE) | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | roads: road to node 41 (ORANGE) | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: Empty | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: RED connecting nodes 7 ↔ 8
+Road: RED connecting nodes 8 ↔ 7
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+Road: ORANGE connecting nodes 41 ↔ 42
+Road: ORANGE connecting nodes 42 ↔ 41
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 51 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 87 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 1 settlements at nodes [8], 0 cities, 2 roads
+ORANGE: 1 settlements at nodes [41], 0 cities, 2 roads
+WHITE: 0 settlements, 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:43,916 - 
+==================================================
+2025-06-07 02:06:43,916 - TURN 8 - WHITE's turn
+2025-06-07 02:06:43,916 - ==================================================
+2025-06-07 02:06:43,916 - 
+GAME STATE:
+=== CATAN GAME STATE ===
+Turn: 3
+Current player: WHITE
+
+=== PLAYER STATUS ===
+    BLUE: 1 VP (1 actual), 0 resources
+    RED: 1 VP (1 actual), 0 resources
+    ORANGE: 1 VP (1 actual), 0 resources
+>>> WHITE: 1 VP (1 actual), 0 resources (Wood: 0, Brick: 0, Sheep: 0, Wheat: 0, Ore: 0)
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+Robber position: (0, 1, -1)
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): BRICK with number 9 | corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): ORE with number 2 | corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): ORE with number 3 | corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): SHEEP with number 8 | corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): SHEEP with number 11 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WHEAT with number 9 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): WHEAT with number 4 | corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): BRICK with number 4 | corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): WOOD with number 12 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): BRICK with number 6 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): DESERT (no resources) | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15): WHEAT with number 6 | corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): WOOD with number 3 | corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): SHEEP with number 10 | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): WOOD with number 5 | corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): SHEEP with number 11 | corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): ORE with number 10 | corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): WOOD with number 5 | corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): WHEAT with number 8 | corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- PORTS ---
+Port at (-3, 0, 3): 2:1 ORE (facing NORTHEAST, connects nodes [36, 35, 68, 69, 70, 71])
+Port at (-3, 2, 1): 2:1 BRICK (facing EAST, connects nodes [41, 39, 38, 73, 74, 75])
+Port at (-2, 3, -1): 3:1 Generic (facing EAST, connects nodes [79, 44, 40, 42, 76, 80])
+Port at (-1, -2, 3): 3:1 Generic (facing NORTHWEST, connects nodes [32, 31, 64, 65, 66, 33])
+Port at (0, 3, -3): 2:1 WOOD (facing SOUTHEAST, connects nodes [83, 84, 45, 47, 81, 85])
+Port at (1, -3, 2): 3:1 Generic (facing NORTHWEST, connects nodes [28, 59, 60, 61, 30, 29])
+Port at (2, 1, -3): 2:1 WHEAT (facing SOUTHWEST, connects nodes [88, 89, 50, 49, 48, 87])
+Port at (3, -3, 0): 3:1 Generic (facing WEST, connects nodes [54, 55, 56, 57, 26, 25])
+Port at (3, -1, -2): 2:1 SHEEP (facing SOUTHWEST, connects nodes [92, 93, 94, 53, 52, 51])
+
+--- NODES (Intersection Points) ---
+Node 0: Empty | neighbors: [1, 5, 20] | no roads | adjacent to tile IDs: 0, 5, 6
+Node 1: Empty | neighbors: [0, 2, 6] | no roads | adjacent to tile IDs: 0, 1, 6
+Node 2: Empty | neighbors: [1, 3, 9] | no roads | adjacent to tile IDs: 0, 1, 2
+Node 3: Empty | neighbors: [2, 4, 12] | no roads | adjacent to tile IDs: 0, 2, 3
+Node 4: Empty | neighbors: [3, 5, 15] | no roads | adjacent to tile IDs: 0, 3, 4
+Node 5: Empty | neighbors: [0, 4, 16] | no roads | adjacent to tile IDs: 0, 4, 5
+Node 6: Empty | neighbors: [1, 7, 23] | no roads | adjacent to tile IDs: 1, 6, 18
+Node 7: Empty | neighbors: [6, 8, 24] | roads: road to node 8 (RED) | adjacent to tile IDs: 1, 7, 18
+Node 8: RED SETTLEMENT | neighbors: [7, 9, 27] | roads: road to node 7 (RED) | adjacent to tile IDs: 1, 7, 8
+Node 9: Empty | neighbors: [2, 8, 10] | no roads | adjacent to tile IDs: 1, 2, 8
+Node 10: Empty | neighbors: [9, 11, 29] | no roads | adjacent to tile IDs: 2, 8, 9
+Node 11: Empty | neighbors: [10, 12, 32] | no roads | adjacent to tile IDs: 2, 9, 10
+Node 12: Empty | neighbors: [3, 11, 13] | no roads | adjacent to tile IDs: 2, 3, 10
+Node 13: Empty | neighbors: [12, 14, 34] | no roads | adjacent to tile IDs: 3, 10, 11
+Node 14: Empty | neighbors: [13, 15, 37] | no roads | adjacent to tile IDs: 3, 11, 12
+Node 15: Empty | neighbors: [4, 14, 17] | no roads | adjacent to tile IDs: 3, 4, 12
+Node 16: Empty | neighbors: [5, 18, 21] | no roads | adjacent to tile IDs: 4, 5, 14
+Node 17: Empty | neighbors: [15, 18, 39] | no roads | adjacent to tile IDs: 4, 12, 13
+Node 18: Empty | neighbors: [16, 17, 40] | no roads | adjacent to tile IDs: 4, 13, 14
+Node 19: Empty | neighbors: [20, 21, 46] | no roads | adjacent to tile IDs: 5, 15, 16
+Node 20: Empty | neighbors: [0, 19, 22] | no roads | adjacent to tile IDs: 5, 6, 16
+Node 21: Empty | neighbors: [16, 19, 43] | no roads | adjacent to tile IDs: 5, 14, 15
+Node 22: Empty | neighbors: [20, 23, 49] | no roads | adjacent to tile IDs: 6, 16, 17
+Node 23: Empty | neighbors: [6, 22, 52] | no roads | adjacent to tile IDs: 6, 17, 18
+Node 24: Empty | neighbors: [7, 25, 53] | no roads | adjacent to tile IDs: 7, 18
+Node 25: Empty | neighbors: [24, 26, 54] | no roads | adjacent to tile IDs: 7
+Node 26: Empty | neighbors: [25, 27, 57] | no roads | adjacent to tile IDs: 7
+Node 27: Empty | neighbors: [8, 26, 28] | no roads | adjacent to tile IDs: 7, 8
+Node 28: Empty | neighbors: [27, 29, 59] | no roads | adjacent to tile IDs: 8
+Node 29: Empty | neighbors: [10, 28, 30] | no roads | adjacent to tile IDs: 8, 9
+Node 30: Empty | neighbors: [29, 31, 61] | no roads | adjacent to tile IDs: 9
+Node 31: BLUE SETTLEMENT | neighbors: [30, 32, 64] | roads: road to node 32 (BLUE) | adjacent to tile IDs: 9
+Node 32: Empty | neighbors: [11, 31, 33] | roads: road to node 31 (BLUE) | adjacent to tile IDs: 9, 10
+Node 33: Empty | neighbors: [32, 34, 66] | no roads | adjacent to tile IDs: 10
+Node 34: Empty | neighbors: [13, 33, 35] | no roads | adjacent to tile IDs: 10, 11
+Node 35: Empty | neighbors: [34, 36, 68] | no roads | adjacent to tile IDs: 11
+Node 36: Empty | neighbors: [35, 37, 71] | no roads | adjacent to tile IDs: 11
+Node 37: Empty | neighbors: [14, 36, 38] | no roads | adjacent to tile IDs: 11, 12
+Node 38: Empty | neighbors: [37, 39, 73] | no roads | adjacent to tile IDs: 12
+Node 39: Empty | neighbors: [17, 38, 41] | no roads | adjacent to tile IDs: 12, 13
+Node 40: Empty | neighbors: [18, 42, 44] | no roads | adjacent to tile IDs: 13, 14
+Node 41: ORANGE SETTLEMENT | neighbors: [39, 42, 75] | roads: road to node 42 (ORANGE) | adjacent to tile IDs: 13
+Node 42: Empty | neighbors: [40, 41, 76] | roads: road to node 41 (ORANGE) | adjacent to tile IDs: 13
+Node 43: Empty | neighbors: [21, 44, 47] | no roads | adjacent to tile IDs: 14, 15
+Node 44: Empty | neighbors: [40, 43, 79] | no roads | adjacent to tile IDs: 14
+Node 45: WHITE SETTLEMENT | neighbors: [46, 47, 84] | no roads | adjacent to tile IDs: 15
+Node 46: Empty | neighbors: [19, 45, 48] | no roads | adjacent to tile IDs: 15, 16
+Node 47: Empty | neighbors: [43, 45, 81] | no roads | adjacent to tile IDs: 15
+Node 48: Empty | neighbors: [46, 49, 87] | no roads | adjacent to tile IDs: 16
+Node 49: Empty | neighbors: [22, 48, 50] | no roads | adjacent to tile IDs: 16, 17
+Node 50: Empty | neighbors: [49, 51, 89] | no roads | adjacent to tile IDs: 17
+Node 51: Empty | neighbors: [50, 52, 92] | no roads | adjacent to tile IDs: 17
+Node 52: Empty | neighbors: [23, 51, 53] | no roads | adjacent to tile IDs: 17, 18
+Node 53: Empty | neighbors: [24, 52, 94] | no roads | adjacent to tile IDs: 18
+
+--- ROADS (Edge Connections) ---
+Road: RED connecting nodes 7 ↔ 8
+Road: RED connecting nodes 8 ↔ 7
+Road: BLUE connecting nodes 31 ↔ 32
+Road: BLUE connecting nodes 32 ↔ 31
+Road: ORANGE connecting nodes 41 ↔ 42
+Road: ORANGE connecting nodes 42 ↔ 41
+
+--- POSSIBLE BUILDING LOCATIONS ---
+Available nodes for settlements: 50 nodes
+Empty nodes: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 46, 47, 48, 49, 50, 51, 52, 53]
+Available road connections: 87 possible roads
+
+=== BUILDINGS SUMMARY ===
+BLUE: 1 settlements at nodes [31], 0 cities, 2 roads
+RED: 1 settlements at nodes [8], 0 cities, 2 roads
+ORANGE: 1 settlements at nodes [41], 0 cities, 2 roads
+WHITE: 1 settlements at nodes [45], 0 cities, 0 roads
+
+=== CURRENT SITUATION ===
+Normal turn phase
+2025-06-07 02:06:43,917 - 
+GAME ENDED: Maximum turns (8) reached
+2025-06-07 02:06:43,917 - 
+GAME FINISHED at 2025-06-07 02:06:43.917377
+2025-06-07 02:06:43,917 - Game ended without a winner (max turns reached)
