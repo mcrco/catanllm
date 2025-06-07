@@ -125,8 +125,8 @@ def example_openrouter_game(max_turns=None):
         create_openrouter_player(
             Color.RED, 
             api_key=None,  # Will use OPENROUTER_API_KEY environment variable
-            model="qwen/qwen3-8b",
-            name="Qwen3-8B"
+            model="google/gemma-3-27b-it",
+            name="Gemma-3-27B-IT"
         ),
         RandomPlayer(Color.BLUE),
         RandomPlayer(Color.WHITE),

@@ -79,7 +79,7 @@ class OpenRouterWrapper:
                 model=self.model,
                 messages=messages,
                 temperature=0.1,
-                max_tokens=500,
+                max_tokens=32768,
             )
             print("--- Received response from OpenRouter ---")
             print(f"Raw response object: {response}")
