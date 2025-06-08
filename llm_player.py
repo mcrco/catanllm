@@ -10,8 +10,7 @@ from typing import Union, List
 from catanatron import Game, Player, Action, Color
 
 from game_convert import game_to_natural_language, format_playable_actions
-from openrouter_wrapper import OpenRouterWrapper
-from vllm_wrapper import VLLMWrapper
+from llm_wrapper import LLMWrapper
 
 
 # Set up logging
@@ -24,7 +23,7 @@ class LLMPlayer(Player):
     LLM-powered Catan player that uses either OpenRouter or vLLM for decision making.
     """
     
-    def __init__(self, color: Color, llm_wrapper: Union[OpenRouterWrapper, VLLMWrapper], name: str = None):
+    def __init__(self, color: Color, llm_wrapper: LLMWrapper, name: str = None):
         """
         Initialize LLM player.
         
@@ -188,11 +187,11 @@ def create_openrouter_player(color: Color, api_key: str = None, model: str = "an
     Returns:
         LLMPlayer: Configured LLM player
     """
-    wrapper = OpenRouterWrapper(api_key=api_key, model=model)
+    wrapper = LLMWrapper(server='openrouter', api_key=api_key, model=model)
     return LLMPlayer(color, wrapper, name)
 
 
-def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", model_name: str = None, name: str = None) -> LLMPlayer:
+def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", model: str = None, name: str = None) -> LLMPlayer:
     """
     Create an LLM player using vLLM.
     
@@ -205,5 +204,5 @@ def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", mo
     Returns:
         LLMPlayer: Configured LLM player
     """
-    wrapper = VLLMWrapper(base_url=base_url, model_name=model_name)
+    wrapper = LLMWrapper(server='vllm', base_url=base_url, model=model)
     return LLMPlayer(color, wrapper, name)
