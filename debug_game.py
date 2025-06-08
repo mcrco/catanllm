@@ -33,7 +33,6 @@ def debug_game():
         game_state_nl = game_to_natural_language(game, current_player.color)
         print(f"Current player: {current_player.color}")
         print("Game State (Natural Language):\n", game_state_nl)
-        input("Press Enter to continue...")
         # Let the game proceed one step
         game.play_tick()
 

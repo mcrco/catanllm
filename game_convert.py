@@ -197,15 +197,16 @@ def game_to_natural_language(game: Game, current_player_color, verbose = False) 
     description.append("")
 
     # Current game phase
-    description.append("=== CURRENT SITUATION ===")
-    if state.is_discarding:
-        description.append("Player must discard cards (rolled 7)")
-    elif state.is_moving_knight:
-        description.append("Player must move the robber")
-    elif state.is_road_building:
-        description.append(f"Player is in road building phase ({state.free_roads_available} roads remaining)")
-    else:
-        description.append("Normal turn phase")
+    if verbose:
+        description.append("=== CURRENT SITUATION ===")
+        if state.is_discarding:
+            description.append("Player must discard cards (rolled 7)")
+        elif state.is_moving_knight:
+            description.append("Player must move the robber")
+        elif state.is_road_building:
+            description.append(f"Player is in road building phase ({state.free_roads_available} roads remaining)")
+        else:
+            description.append("Normal turn phase")
 
     return "\n".join(description)
 
@@ -238,7 +239,7 @@ def format_playable_actions(playable_actions) -> str:
 
         # Convert action to readable format
         if action_type == ActionType.ROLL:
-            desc = f"Roll dice {action_value}"
+            desc = "Roll dice"
         elif action_type == ActionType.END_TURN:
             desc = "End turn"
         elif action_type == ActionType.BUILD_ROAD:
@@ -277,28 +278,23 @@ def format_playable_actions(playable_actions) -> str:
                 desc = f"Move robber to tile {action_value[0]}, steal from {action_value[1] if action_value[1] else 'no one'}"
             else:
                 desc = f"Move robber to tile {action_value[0]}"
-        elif action_type == ActionType.MARITIME_TRADE and action_value is not None:
-            if len(action_value) >= 5:
-                giving_resources = []
-                receiving_resource = action_value[4] if len(action_value) > 4 else "unknown"
-                
-                # Count resources being given
-                for i in range(4):
-                    if action_value[i] is not None:
-                        giving_resources.append(action_value[i])
-                
-                if len(giving_resources) == 4:
-                    desc = f"Maritime trade: give 4 {giving_resources[0]} for 1 {receiving_resource} (4:1 bank trade)"
-                elif len(giving_resources) == 3:
-                    desc = f"Maritime trade: give 3 {giving_resources[0]} for 1 {receiving_resource} (3:1 port trade)"
-                elif len(giving_resources) == 2:
-                    desc = f"Maritime trade: give 2 {giving_resources[0]} for 1 {receiving_resource} (2:1 port trade)"
-                else:
-                    desc = f"Maritime trade: give {giving_resources} for {receiving_resource}"
+        elif action_type == ActionType.MARITIME_TRADE:
+            # action_value is a tuple like ('SHEEP', 'SHEEP', 'SHEEP', 'SHEEP', 'WOOD')
+            # The first 4 are what you give, the last is what you get
+            if action_value and len(action_value) == 5:
+                give = action_value[0]
+                get = action_value[4]
+                port_ratio = 4
+                if action_value[3] is None:
+                    port_ratio = 3
+                if action_value[2] is None:
+                    port_ratio = 2
+
+                desc = f"Maritime trade: give {port_ratio} {give} for 1 {get} ({port_ratio}:1 port trade)"
             else:
-                desc = f"Maritime trade: {action_value}"
+                desc = "Maritime trade"
         else:
-            desc = f"{action_type.name}: {action_value}"
+            desc = f"Action: {action_type}"
 
         description.append(f"{i}: {desc}")
 
