@@ -7,7 +7,7 @@ import os
 import logging
 from datetime import datetime
 from catanatron import Game, Color, RandomPlayer
-
+from catanatron.models.map import MINI_MAP_TEMPLATE, CatanMap
 from llm_player import create_openrouter_player, create_vllm_player
 from game_convert import game_to_natural_language
 
@@ -45,7 +45,7 @@ class LoggingGame(Game):
     """Custom Game class that logs LLM interactions."""
     
     def __init__(self, players, logger=None, max_turns=None):
-        super().__init__(players)
+        super().__init__(players, catan_map=CatanMap.from_template(MINI_MAP_TEMPLATE), vps_to_win=10)
         self.logger = logger
         self.turn_number = 0
         self.max_turns = max_turns
@@ -117,9 +117,12 @@ def example_openrouter_game(max_turns=None, num_players=2):
         create_openrouter_player(
             Color.RED, 
             api_key=None,  # Will use OPENROUTER_API_KEY environment variable
-            model="qwen/qwen3-8b",
-            name="Qwen-3-8B"
+            model="google/gemini-2.5-flash-preview-05-20",
+            name="gemini-2.5-flash-preview-05-20"
         ),
+        RandomPlayer(Color.BLUE),
+        # RandomPlayer(Color.WHITE),
+        # RandomPlayer(Color.ORANGE),
     ]
 
     colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
