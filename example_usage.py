@@ -7,6 +7,7 @@ import os
 import logging
 from datetime import datetime
 from catanatron import Game, Color, RandomPlayer
+from catanatron.players.minimax import AlphaBetaPlayer
 from catanatron.models.map import MINI_MAP_TEMPLATE, CatanMap
 from llm_player import create_openrouter_player, create_vllm_player
 from game_convert import game_to_natural_language
@@ -55,7 +56,7 @@ class LoggingGame(Game):
             self.turn_number += 1
             current_player = self.state.current_player()
             # Log game state before the turn
-            # log_game_state(self.logger, self, current_player.color, self.turn_number)
+            log_game_state(self.logger, self, current_player.color, self.turn_number)
             # Check if it's an LLM player and log their response
             if hasattr(current_player, 'llm_wrapper'):
                 self.logger.info(f"\nLLM PLAYER {current_player.name} is making a decision...")
@@ -118,14 +119,18 @@ def example_openrouter_game(max_turns=None, num_players=2):
             Color.RED, 
             api_key=None,  # Will use OPENROUTER_API_KEY environment variable
             model="google/gemini-2.5-flash-preview-05-20",
-            name="gemini-2.5-flash-preview-05-20"
+            name="gemini-2.5-flash-preview-05-20",
+            logger=logger
         ),
+<<<<<<< HEAD
         RandomPlayer(Color.BLUE),
+=======
+        AlphaBetaPlayer(Color.BLUE),
+        # RandomPlayer(Color.WHITE),
+        # RandomPlayer(Color.ORANGE),
+>>>>>>> 785cd6fd989da0bbb6097079cceea20eaed678dc
     ]
 
-    colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
-    for i in range(num_players - 1):
-        players.append(RandomPlayer(colors[i]))
     
     # Create and play game with logging
     game = LoggingGame(players, logger, max_turns)

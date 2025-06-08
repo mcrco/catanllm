@@ -8,7 +8,7 @@ import openai
 
 dotenv.load_dotenv()
 
-with open("./sample_prompt.txt") as f:
+with open("./stepwise_prompt.txt") as f:
     DEFAULT_PROMPT = f.read()
 
 
