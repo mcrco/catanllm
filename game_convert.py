@@ -3,9 +3,7 @@ Convert Catanatron game state to natural language for LLM processing.
 """
 
 from catanatron import Game, ActionType
-from catanatron.models.enums import Action
 from catanatron.state_functions import (
-    get_actual_victory_points,
     get_player_freqdeck,
     get_visible_victory_points,
 )
@@ -40,7 +38,6 @@ def game_to_natural_language(game: Game, current_player_color, verbose = False) 
 
         # Victory points
         visible_vp = get_visible_victory_points(state, color)
-        actual_vp = get_actual_victory_points(state, color)
 
         # Resources
         freqdeck = get_player_freqdeck(state, color)
@@ -53,7 +50,7 @@ def game_to_natural_language(game: Game, current_player_color, verbose = False) 
             resources_detail = ""
 
         description.append(
-            f"{marker}{color.name}: {visible_vp} VP ({actual_vp} actual), {total_resources} resources{resources_detail}"
+            f"{marker}{color.name}: {visible_vp} VP, {total_resources} resources{resources_detail}"
         )
 
     description.append("")
