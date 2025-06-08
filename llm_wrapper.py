@@ -12,13 +12,13 @@ with open("./sample_prompt.txt") as f:
     DEFAULT_PROMPT = f.read()
 
 
-class OpenRouterWrapper:
+class LLMWrapper:
     """
     Wrapper for OpenRouter API to make LLM requests using the openai SDK.
     """
 
     def __init__(
-        self, api_key: str | None = None, model: str = "qwen/qwen3-8b"
+        self, server: str = 'openrouter', api_key: str | None = None, model: str = "qwen/qwen3-8b"
     ):
         """
         Initialize OpenRouter wrapper.
@@ -27,6 +27,14 @@ class OpenRouterWrapper:
             api_key: OpenRouter API key. If None, will try to get from environment.
             model: Model to use for requests.
         """
+        
+        if server == 'openrouter':
+            self.base_url = "https://openrouter.ai/api/v1"
+        elif server == 'vllm':
+            self.base_url = "http://localhost:8000"
+        else:
+            raise ValueError(f"Invalid server: {server}")
+
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         if not self.api_key:
             raise ValueError(
@@ -34,7 +42,6 @@ class OpenRouterWrapper:
             )
 
         self.model = model
-        self.base_url = "https://openrouter.ai/api/v1"
 
         # Set up the OpenAI client for OpenRouter
         self.client = openai.OpenAI(
@@ -70,32 +77,23 @@ class OpenRouterWrapper:
             {"role": "user", "content": user_message},
         ]
 
-        print("--- Sending request to OpenRouter ---")
-        print(f"Model: {self.model}")
-        print(f"Messages: {messages}")
-
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 temperature=0.1,
-                max_tokens=32768,
+                max_tokens=16384,
             )
-            print("--- Received response from OpenRouter ---")
-            print(f"Raw response object: {response}")
 
             if response.choices:
                 content = response.choices[0].message.content
-                print(f"Extracted content: {repr(content)}")
                 return content.strip()
             else:
-                print("Warning: OpenRouter response has no choices.")
+                print("Warning: LLM response has no choices.")
                 return ""
 
         except Exception as e:
-            print(f"--- OpenRouter API request failed ---")
-            print(f"Error: {e}")
-            raise RuntimeError(f"OpenRouter API request failed: {e}")
+            raise RuntimeError(f"LLM API request failed: {e}")
 
     def _get_default_system_prompt(self) -> str:
         """
@@ -107,6 +105,6 @@ class OpenRouterWrapper:
         return DEFAULT_PROMPT 
 
 if __name__ == "__main__":
-    wrapper = OpenRouterWrapper()
+    wrapper = LLMWrapper()
     response = wrapper.generate_response("Test State", "Test Actions")
     print(response)

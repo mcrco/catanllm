@@ -14,23 +14,18 @@ from game_convert import game_to_natural_language
 
 def setup_logging():
     """Set up logging to file for game states and LLM outputs."""
-    # Create a logger
     logger = logging.getLogger('catan_game')
     logger.setLevel(logging.INFO)
     
-    # Remove any existing handlers
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
     
-    # Create file handler
     file_handler = logging.FileHandler('openrouter-output.log', mode='w')
     file_handler.setLevel(logging.INFO)
     
-    # Create formatter
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     file_handler.setFormatter(formatter)
     
-    # Add handler to logger
     logger.addHandler(file_handler)
     
     return logger
@@ -79,9 +74,6 @@ class LoggingGame(Game):
             if self.state.actions:
                 last_action = self.state.actions[-1]
                 self.logger.info(f"\nACTION TAKEN: {last_action}")
-            llm_response = getattr(prev_player, 'last_llm_response', None)
-            if llm_response is not None:
-                self.logger.info(f"\nLLM OUTPUT:\n{llm_response}")
     
     def play(self):
         """Override play to log game start and end."""
@@ -111,7 +103,7 @@ class LoggingGame(Game):
         return result
 
 
-def example_openrouter_game(max_turns=None):
+def example_openrouter_game(max_turns=None, num_players=2):
     """
     Example game with OpenRouter LLM player vs random players.
     """
@@ -132,6 +124,10 @@ def example_openrouter_game(max_turns=None):
         # RandomPlayer(Color.WHITE),
         # RandomPlayer(Color.ORANGE),
     ]
+
+    colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
+    for i in range(num_players - 1):
+        players.append(RandomPlayer(colors[i]))
     
     # Create and play game with logging
     game = LoggingGame(players, logger, max_turns)
@@ -146,7 +142,7 @@ def example_openrouter_game(max_turns=None):
     return winning_color
 
 
-def example_vllm_game(max_turns=None):
+def example_vllm_game(max_turns=None, num_players=2):
     """
     Example game with vLLM player vs random players.
     """
@@ -160,13 +156,14 @@ def example_vllm_game(max_turns=None):
         create_vllm_player(
             Color.RED,
             base_url="http://localhost:8000",
-            model_name=None,  # Use default model from vLLM server
+            model=None,  # Use default model from vLLM server
             name="Local-LLM"
         ),
-        RandomPlayer(Color.BLUE),
-        RandomPlayer(Color.WHITE),
-        RandomPlayer(Color.ORANGE),
     ]
+
+    colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
+    for i in range(num_players - 1):
+        players.append(RandomPlayer(colors[i]))
     
     # Create and play game with logging
     game = LoggingGame(players, logger, max_turns)
@@ -179,43 +176,6 @@ def example_vllm_game(max_turns=None):
     print(f"Game finished! Winner: {winning_color}")
     
     return winning_color
-
-
-def example_mixed_game(max_turns=None):
-    """
-    Example game with both OpenRouter and vLLM players.
-    """
-    print("=== Mixed LLM Players Example ===")
-    
-    # Set up logging
-    logger = setup_logging()
-    
-    # Create players
-    players = [
-        create_openrouter_player(
-            Color.RED,
-            name="Claude-LLM"
-        ),
-        create_vllm_player(
-            Color.BLUE,
-            name="Local-LLM"
-        ),
-        RandomPlayer(Color.WHITE),
-        RandomPlayer(Color.ORANGE),
-    ]
-    
-    # Create and play game with logging
-    game = LoggingGame(players, logger, max_turns)
-    
-    print("Starting game...")
-    if max_turns:
-        print(f"Max turns: {max_turns}")
-    print("Game state and LLM outputs will be logged to openrouter-output.log")
-    winning_color = game.play()
-    print(f"Game finished! Winner: {winning_color}")
-    
-    return winning_color
-
 
 def run_multiple_games(num_games=10, use_openrouter=True, max_turns=None):
     """
@@ -260,11 +220,12 @@ if __name__ == "__main__":
     import argparse
     
     parser = argparse.ArgumentParser(description="LLM Catan Player Examples")
-    parser.add_argument("--mode", choices=["openrouter", "vllm", "mixed", "benchmark"], 
+    parser.add_argument("--mode", choices=["openrouter", "vllm", "benchmark"], 
                        default="openrouter", help="Which example to run")
     parser.add_argument("--games", type=int, default=1, help="Number of games to run")
     parser.add_argument("--vps", type=int, default=3, help="Number of victory points to win")
     parser.add_argument("--max-turns", type=int, default=None, help="Maximum number of turns per game")
+    parser.add_argument("--num-players", type=int, default=2, help="Number of players")
     
     args = parser.parse_args()
     
@@ -279,8 +240,6 @@ if __name__ == "__main__":
                 example_vllm_game(args.max_turns)
             else:
                 run_multiple_games(args.games, use_openrouter=False, max_turns=args.max_turns)
-        elif args.mode == "mixed":
-            example_mixed_game(args.max_turns)
         elif args.mode == "benchmark":
             run_multiple_games(args.games, use_openrouter=True, max_turns=args.max_turns)
             
