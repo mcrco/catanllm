@@ -12,21 +12,20 @@ from catanatron.state_functions import (
 from catanatron.models.board import STATIC_GRAPH
 
 
-def game_to_natural_language(game: Game, current_player_color) -> str:
+def game_to_natural_language(game: Game, current_player_color, verbose = False) -> str:
     """
     Convert a Catanatron game instance to natural language description.
 
     Args:
         game: The Catanatron game instance
         current_player_color: The color of the current player making decisions
-
+        verbose: Whether to include detailed information about the game state
     Returns:
         str: Natural language description of the game state
     """
     state = game.state
-
     description = []
-
+    
     # Game overview
     description.append("=== CATAN GAME STATE ===")
     description.append(f"Turn: {state.num_turns}")
@@ -58,17 +57,17 @@ def game_to_natural_language(game: Game, current_player_color) -> str:
         )
 
     description.append("")
-
-    # Board coordinate system explanation
-    description.append("=== BOARD COORDINATE SYSTEM EXPLANATION ===")
-    description.append("SPATIAL RELATIONSHIPS:")
-    description.append("- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0")
-    description.append("- Nodes: Intersection points between tiles, identified by integer IDs (0-53)")
-    description.append("- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)")
-    description.append("- Each tile has 6 nodes at its corners and 6 edges connecting those nodes")
-    description.append("- Adjacent tiles share nodes and edges")
-    description.append("- Ports are located on specific edges facing the ocean")
-    description.append("")
+    if verbose:
+        # Board coordinate system explanation
+        description.append("=== BOARD COORDINATE SYSTEM EXPLANATION ===")
+        description.append("SPATIAL RELATIONSHIPS:")
+        description.append("- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0")
+        description.append("- Nodes: Intersection points between tiles, identified by integer IDs (0-53)")
+        description.append("- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)")
+        description.append("- Each tile has 6 nodes at its corners and 6 edges connecting those nodes")
+        description.append("- Adjacent tiles share nodes and edges")
+        description.append("- Ports are located on specific edges facing the ocean")
+        description.append("")
 
     # Full board layout
     description.append("=== BOARD LAYOUT ===")
@@ -76,63 +75,69 @@ def game_to_natural_language(game: Game, current_player_color) -> str:
     description.append("")
 
     # Hexagon tiles with resources and numbers
-    description.append("--- HEXAGON TILES ---")
-    for coordinate, tile in sorted(state.board.map.land_tiles.items()):
-        if tile.resource is None:
-            tile_desc = f"Tile {coordinate} (ID {tile.id}): DESERT (no resources)"
-        else:
-            tile_desc = f"Tile {coordinate} (ID {tile.id}): {tile.resource} with number {tile.number}"
-        
-        # Show which nodes belong to this tile
-        tile_nodes = [tile.nodes[noderef] for noderef in tile.nodes.keys()]
-        tile_nodes.sort()
-        tile_desc += f" | corner nodes: {tile_nodes}"
-        
-        description.append(tile_desc)
-    description.append("")
+    if verbose:
+        description.append("--- HEXAGON TILES ---")
+        for coordinate, tile in sorted(state.board.map.land_tiles.items()):
+            if tile.resource is None:
+                tile_desc = f"Tile {coordinate} (ID {tile.id}): DESERT (no resources)"
+            else:
+                tile_desc = f"Tile {coordinate} (ID {tile.id}): {tile.resource} with number {tile.number}"
+            
+            # Show which nodes belong to this tile
+            tile_nodes = [tile.nodes[noderef] for noderef in tile.nodes.keys()]
+            tile_nodes.sort()
+            tile_desc += f" | corner nodes: {tile_nodes}"
+            
+            description.append(tile_desc)
+        description.append("")
 
     # Ports
-    description.append("--- PORTS ---")
-    for coordinate, tile in sorted(state.board.map.tiles.items()):
-        # Check if it's a Port by looking for specific Port attributes
-        if hasattr(tile, 'direction') and hasattr(tile, 'resource') and hasattr(tile, 'id') and not hasattr(tile, 'number'):
-            port_type = "3:1 Generic" if tile.resource is None else f"2:1 {tile.resource}"
-            # Get the node IDs for this port
-            port_nodes = [tile.nodes[noderef] for noderef in tile.nodes.keys()]
-            description.append(f"Port at {coordinate}: {port_type} (facing {tile.direction.name}, connects nodes {port_nodes})")
-    description.append("")
+    if verbose:
+        description.append("--- PORTS ---")
+        for coordinate, tile in sorted(state.board.map.tiles.items()):
+            # Check if it's a Port by looking for specific Port attributes
+            if hasattr(tile, 'direction') and hasattr(tile, 'resource') and hasattr(tile, 'id') and not hasattr(tile, 'number'):
+                port_type = "3:1 Generic" if tile.resource is None else f"2:1 {tile.resource}"
+                # Get the node IDs for this port
+                port_nodes = [tile.nodes[noderef] for noderef in tile.nodes.keys()]
+                description.append(f"Port at {coordinate}: {port_type} (facing {tile.direction.name}, connects nodes {port_nodes})")
+        description.append("")
 
-    # All nodes and their states
-    description.append("--- NODES (Intersection Points) ---")
-    for node_id in sorted(state.board.map.land_nodes):
-        building_info = state.board.buildings.get(node_id, None)
-        if building_info:
-            color, building_type = building_info
-            building_desc = f"{color.name} {building_type}"
-        else:
-            building_desc = "Empty"
-        
-        # Find neighboring nodes (connected by roads)
-        neighboring_nodes = list(STATIC_GRAPH.neighbors(node_id))
-        neighboring_nodes.sort()
-        
-        # Find which tiles this node belongs to
-        adjacent_tiles = state.board.map.adjacent_tiles.get(node_id, [])
-        tile_ids = [str(tile.id) for tile in adjacent_tiles]
-        
-        # Find existing roads from this node
-        connected_roads = []
-        for neighbor_id in neighboring_nodes:
-            edge = tuple(sorted([node_id, neighbor_id]))
-            if edge in state.board.roads:
-                road_color = state.board.roads[edge].name
-                connected_roads.append(f"road to node {neighbor_id} ({road_color})")
-        
-        neighbor_info = f"neighbors: {neighboring_nodes}" if neighboring_nodes else "no neighbors"
-        road_info = f"roads: {', '.join(connected_roads)}" if connected_roads else "no roads"
-        
-        description.append(f"Node {node_id}: {building_desc} | {neighbor_info} | {road_info} | adjacent to tile IDs: {', '.join(tile_ids)}")
-    description.append("")
+
+    if verbose:
+        # All nodes and their states
+        description.append("--- NODES (Intersection Points) ---")
+        for node_id in sorted(state.board.map.land_nodes):
+            building_info = state.board.buildings.get(node_id, None)
+            if building_info:
+                color, building_type = building_info
+                building_desc = f"{color.name} {building_type}"
+            else:
+                building_desc = "Empty"
+            
+            # Find neighboring nodes (connected by roads)
+            neighboring_nodes = list(STATIC_GRAPH.neighbors(node_id))
+            neighboring_nodes.sort()
+            
+            # Find which tiles this node belongs to
+            adjacent_tiles = state.board.map.adjacent_tiles.get(node_id, [])
+            tile_ids = [str(tile.id) for tile in adjacent_tiles]
+            
+            # Find existing roads from this node
+            connected_roads = []
+            for neighbor_id in neighboring_nodes:
+                edge = tuple(sorted([node_id, neighbor_id]))
+                if edge in state.board.roads:
+                    road_color = state.board.roads[edge].name
+                    connected_roads.append(f"road to node {neighbor_id} ({road_color})")
+            
+            neighbor_info = f"neighbors: {neighboring_nodes}" if neighboring_nodes else "no neighbors"
+            road_info = f"roads: {', '.join(connected_roads)}" if connected_roads else "no roads"
+            
+            description.append(f"Node {node_id}: {building_desc} | {neighbor_info} | {road_info} | adjacent to tile IDs: {', '.join(tile_ids)}")
+        description.append("")
+    else:
+        pass
 
     # All roads
     description.append("--- ROADS (Edge Connections) ---")
@@ -162,7 +167,7 @@ def game_to_natural_language(game: Game, current_player_color) -> str:
                     available_edges.append(edge)
     
     description.append(f"Available road connections: {len(available_edges)} possible roads")
-    if len(available_edges) <= 20:  # Only show if not too many
+    if len(available_edges) <= 20 or verbose:  # Only show if not too many
         description.append(f"Available road edges: {sorted(available_edges)}")
     description.append("")
 
