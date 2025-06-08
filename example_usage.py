@@ -122,13 +122,9 @@ def example_openrouter_game(max_turns=None, num_players=2):
             name="gemini-2.5-flash-preview-05-20",
             logger=logger
         ),
-<<<<<<< HEAD
-        RandomPlayer(Color.BLUE),
-=======
         AlphaBetaPlayer(Color.BLUE),
         # RandomPlayer(Color.WHITE),
         # RandomPlayer(Color.ORANGE),
->>>>>>> 785cd6fd989da0bbb6097079cceea20eaed678dc
     ]
 
     
