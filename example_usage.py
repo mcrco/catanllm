@@ -55,7 +55,7 @@ class LoggingGame(Game):
             self.turn_number += 1
             current_player = self.state.current_player()
             # Log game state before the turn
-            log_game_state(self.logger, self, current_player.color, self.turn_number)
+            # log_game_state(self.logger, self, current_player.color, self.turn_number)
             # Check if it's an LLM player and log their response
             if hasattr(current_player, 'llm_wrapper'):
                 self.logger.info(f"\nLLM PLAYER {current_player.name} is making a decision...")
@@ -152,9 +152,10 @@ def example_vllm_game(max_turns=None, num_players=2):
     players = [
         create_vllm_player(
             Color.RED,
-            base_url="http://localhost:8000",
-            model=None,  # Use default model from vLLM server
-            name="Local-LLM"
+            base_url="http://localhost:8000/v1",
+            model='Qwen/Qwen3-1.7B',  # Use default model from vLLM server
+            name="Qwen-3-1.7B",
+            max_tokens=8192
         ),
     ]
 
@@ -240,11 +241,5 @@ if __name__ == "__main__":
         elif args.mode == "benchmark":
             run_multiple_games(args.games, use_openrouter=True, max_turns=args.max_turns)
             
-    except KeyboardInterrupt:
-        print("\nInterrupted by user")
     except Exception as e:
         print(f"Error: {e}")
-        print("\nMake sure you have:")
-        print("1. Set OPENROUTER_API_KEY environment variable (for OpenRouter)")
-        print("2. Started vLLM server on localhost:8000 (for vLLM)")
-        print("3. Installed dependencies: pip install -e .") 

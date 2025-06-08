@@ -18,7 +18,7 @@ class LLMWrapper:
     """
 
     def __init__(
-        self, server: str = 'openrouter', api_key: str | None = None, model: str = "qwen/qwen3-8b"
+        self, base_url: str, api_key: str | None = None, model: str = "Qwen/Qwen3-1.7B", max_tokens: int = 16384
     ):
         """
         Initialize OpenRouter wrapper.
@@ -28,27 +28,16 @@ class LLMWrapper:
             model: Model to use for requests.
         """
         
-        if server == 'openrouter':
-            self.base_url = "https://openrouter.ai/api/v1"
-        elif server == 'vllm':
-            self.base_url = "http://localhost:8000"
-        else:
-            raise ValueError(f"Invalid server: {server}")
-
+        self.base_url = base_url
         self.api_key = api_key or os.getenv("OPENROUTER_API_KEY")
-        if not self.api_key:
-            raise ValueError(
-                "OpenRouter API key must be provided or set in OPENROUTER_API_KEY environment variable"
-            )
-
         self.model = model
-
-        # Set up the OpenAI client for OpenRouter
+        self.max_tokens = max_tokens
+        
         self.client = openai.OpenAI(
             base_url=self.base_url,
             api_key=self.api_key,
             default_headers={
-                "HTTP-Referer": "https://github.com/marco-catanllm/catanllm",  # Optional, for OpenRouter analytics
+                "HTTP-Referer": "https://github.com/marco-catanllm/catanllm",
                 "X-Title": "Catan LLM Player",
             },
         )
@@ -77,23 +66,14 @@ class LLMWrapper:
             {"role": "user", "content": user_message},
         ]
 
-        try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=0.1,
-                max_tokens=16384,
-            )
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            temperature=0.1,
+            max_tokens=self.max_tokens,
+        )
 
-            if response.choices:
-                content = response.choices[0].message.content
-                return content.strip()
-            else:
-                print("Warning: LLM response has no choices.")
-                return ""
-
-        except Exception as e:
-            raise RuntimeError(f"LLM API request failed: {e}")
+        return response.choices[0].message.content.strip()
 
     def _get_default_system_prompt(self) -> str:
         """
@@ -105,6 +85,6 @@ class LLMWrapper:
         return DEFAULT_PROMPT 
 
 if __name__ == "__main__":
-    wrapper = LLMWrapper()
+    wrapper = LLMWrapper(base_url='http://localhost:8000')
     response = wrapper.generate_response("Test State", "Test Actions")
     print(response)

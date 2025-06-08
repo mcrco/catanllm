@@ -140,6 +140,7 @@ class LLMPlayer(Player):
             Action: Chosen action using fallback logic
         """
         # Simple heuristic: prioritize certain action types
+
         action_priorities = {
             'BUILD_SETTLEMENT': 10,
             'BUILD_CITY': 9,
@@ -187,11 +188,11 @@ def create_openrouter_player(color: Color, api_key: str = None, model: str = "an
     Returns:
         LLMPlayer: Configured LLM player
     """
-    wrapper = LLMWrapper(server='openrouter', api_key=api_key, model=model)
+    wrapper = LLMWrapper(base_url='https://openrouter.ai/api/v1', api_key=api_key, model=model)
     return LLMPlayer(color, wrapper, name)
 
 
-def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", model: str = None, name: str = None) -> LLMPlayer:
+def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", model: str = None, name: str = None, max_tokens: int = 16384) -> LLMPlayer:
     """
     Create an LLM player using vLLM.
     
@@ -204,5 +205,5 @@ def create_vllm_player(color: Color, base_url: str = "http://localhost:8000", mo
     Returns:
         LLMPlayer: Configured LLM player
     """
-    wrapper = LLMWrapper(server='vllm', base_url=base_url, model=model)
+    wrapper = LLMWrapper(base_url=base_url, model=model, max_tokens=max_tokens)
     return LLMPlayer(color, wrapper, name)

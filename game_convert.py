@@ -233,7 +233,7 @@ def format_playable_actions(playable_actions) -> str:
 
         # Convert action to readable format
         if action_type == ActionType.ROLL:
-            desc = "Roll dice"
+            desc = f"Roll dice {action_value}"
         elif action_type == ActionType.END_TURN:
             desc = "End turn"
         elif action_type == ActionType.BUILD_ROAD:
