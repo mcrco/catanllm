@@ -1,5 +1,7 @@
 .env
 *.log
+board/
+logs/
 
 # Python-generated files
 __pycache__/

@@ -1,0 +1,97 @@
+You are an expert Settlers of Catan player. Your goal is to win the game by reaching 10 victory points first.
+You should reason and think step by step as much as you need to, and output your thoughts.
+However your output should always end with these two lines (do not put a hyphen or bullet point before them):
+
+- An explanation for the reasoning for your move. You will use these as notes for future moves. Output these notes in one line with no header. 
+- The action number (The line should only be the number.)
+
+In your reasoning, you should simulate a tree search on moves that you think will bring you the most benefit by considering the consequences of each action.
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+
+--- SPATIAL RELATIONSHIPS OVERVIEW ---
+- Tiles: Hexagonal tiles, identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+--- HEXAGON TILES ---
+Tile (-2, 0, 2) (ID 11): corner nodes: [13, 14, 34, 35, 36, 37]
+Tile (-2, 1, 1) (ID 12): corner nodes: [14, 15, 17, 37, 38, 39]
+Tile (-2, 2, 0) (ID 13): corner nodes: [17, 18, 39, 40, 41, 42]
+Tile (-1, -1, 2) (ID 10): corner nodes: [11, 12, 13, 32, 33, 34]
+Tile (-1, 0, 1) (ID 3): corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (-1, 2, -1) (ID 14): corner nodes: [16, 18, 21, 40, 43, 44]
+Tile (0, -2, 2) (ID 9): corner nodes: [10, 11, 29, 30, 31, 32]
+Tile (0, -1, 1) (ID 2): corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (0, 2, -2) (ID 15):corner nodes: [19, 21, 43, 45, 46, 47]
+Tile (1, -2, 1) (ID 8): corner nodes: [8, 9, 10, 27, 28, 29]
+Tile (1, -1, 0) (ID 1): corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): corner nodes: [0, 1, 6, 20, 22, 23]
+Tile (1, 1, -2) (ID 16): corner nodes: [19, 20, 22, 46, 48, 49]
+Tile (2, -2, 0) (ID 7): corner nodes: [7, 8, 24, 25, 26, 27]
+Tile (2, -1, -1) (ID 18): corner nodes: [6, 7, 23, 24, 52, 53]
+Tile (2, 0, -2) (ID 17): corner nodes: [22, 23, 49, 50, 51, 52]
+
+--- NODES ---
+Node 0: neighbors: [1, 5, 20] | adjacent to tile IDs: 0, 5, 6
+Node 1: neighbors: [0, 2, 6] | adjacent to tile IDs: 0, 1, 6
+Node 2: neighbors: [1, 3, 9] | adjacent to tile IDs: 0, 1, 2
+Node 3: neighbors: [2, 4, 12] | adjacent to tile IDs: 0, 2, 3
+Node 4: neighbors: [3, 5, 15] | adjacent to tile IDs: 0, 3, 4
+Node 5: neighbors: [0, 4, 16] | adjacent to tile IDs: 0, 4, 5
+Node 6: neighbors: [1, 7, 23] | adjacent to tile IDs: 1, 6, 18
+Node 7: neighbors: [6, 8, 24] | adjacent to tile IDs: 1, 7, 18
+Node 8: neighbors: [7, 9, 27] | adjacent to tile IDs: 1, 7, 8
+Node 9: neighbors: [2, 8, 10] | adjacent to tile IDs: 1, 2, 8
+Node 10: neighbors: [9, 11, 29] | adjacent to tile IDs: 2, 8, 9
+Node 11: neighbors: [10, 12, 32] | adjacent to tile IDs: 2, 9, 10
+Node 12: neighbors: [3, 11, 13] | adjacent to tile IDs: 2, 3, 10
+Node 13: neighbors: [12, 14, 34] | adjacent to tile IDs: 3, 10, 11
+Node 14: neighbors: [13, 15, 37] | adjacent to tile IDs: 3, 11, 12
+Node 15: neighbors: [4, 14, 17] | adjacent to tile IDs: 3, 4, 12
+Node 16: neighbors: [5, 18, 21] | adjacent to tile IDs: 4, 5, 14
+Node 17: neighbors: [15, 18, 39] | adjacent to tile IDs: 4, 12, 13
+Node 18: neighbors: [16, 17, 40] | adjacent to tile IDs: 4, 13, 14
+Node 19: neighbors: [20, 21, 46] | adjacent to tile IDs: 5, 15, 16
+Node 20: neighbors: [0, 19, 22] | adjacent to tile IDs: 5, 6, 16
+Node 21: neighbors: [16, 19, 43] | adjacent to tile IDs: 5, 14, 15
+Node 22: neighbors: [20, 23, 49] | adjacent to tile IDs: 6, 16, 17
+Node 23: neighbors: [6, 22, 52] | adjacent to tile IDs: 6, 17, 18
+Node 24: neighbors: [7, 25, 53] | adjacent to tile IDs: 7, 18
+Node 25: neighbors: [24, 26, 54] | adjacent to tile IDs: 7
+Node 26: neighbors: [25, 27, 57] | adjacent to tile IDs: 7
+Node 27: neighbors: [8, 26, 28] | adjacent to tile IDs: 7, 8
+Node 28: neighbors: [27, 29, 59] | adjacent to tile IDs: 8
+Node 29: neighbors: [10, 28, 30] | adjacent to tile IDs: 8, 9
+Node 30: neighbors: [29, 31, 61] | adjacent to tile IDs: 9
+Node 31: neighbors: [30, 32, 64] | adjacent to tile IDs: 9
+Node 32: neighbors: [11, 31, 33] | adjacent to tile IDs: 9, 10
+Node 33: neighbors: [32, 34, 66] | adjacent to tile IDs: 10
+Node 34: neighbors: [13, 33, 35] | adjacent to tile IDs: 10, 11
+Node 35: neighbors: [34, 36, 68] | adjacent to tile IDs: 11
+Node 36: neighbors: [35, 37, 71] | adjacent to tile IDs: 11
+Node 37: neighbors: [14, 36, 38] | adjacent to tile IDs: 11, 12
+Node 38: neighbors: [37, 39, 73] | adjacent to tile IDs: 12
+Node 39: neighbors: [17, 38, 41] | adjacent to tile IDs: 12, 13
+Node 40: neighbors: [18, 42, 44] | adjacent to tile IDs: 13, 14
+Node 41: neighbors: [39, 42, 75] | adjacent to tile IDs: 13
+Node 42: neighbors: [40, 41, 76] | adjacent to tile IDs: 13
+Node 43: neighbors: [21, 44, 47] | adjacent to tile IDs: 14, 15
+Node 44: neighbors: [40, 43, 79] | adjacent to tile IDs: 14
+Node 45: neighbors: [46, 47, 84] | adjacent to tile IDs: 15
+Node 46: neighbors: [19, 45, 48] | adjacent to tile IDs: 15, 16
+Node 47: neighbors: [43, 45, 81] | adjacent to tile IDs: 15
+Node 48: neighbors: [46, 49, 87] | adjacent to tile IDs: 16
+Node 49: neighbors: [22, 48, 50] | adjacent to tile IDs: 16, 17
+Node 50: neighbors: [49, 51, 89] | adjacent to tile IDs: 17
+Node 51: neighbors: [50, 52, 92] | adjacent to tile IDs: 17
+Node 52: neighbors: [23, 51, 53] | adjacent to tile IDs: 17, 18
+Node 53: neighbors: [24, 52, 94] | adjacent to tile IDs: 18
+
+/no_think

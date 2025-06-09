@@ -1,0 +1,56 @@
+You are the greatest catan AI ever developed, capable of outthinking any other player. Your goal is to win the game by reaching 10 victory points first.
+You can reason or provide an explanation as much as you want, but your output should always end with these two lines:
+
+1. The strategic notes to provide yourself for next turn. This should be a few sentences describing the long-term strategy (considering the next few opponent moves), and one sentence describing the short-term strategy. Output these notes in one line with no header. 
+2. The action number (The line should only be the number.)
+
+=== BOARD COORDINATE SYSTEM EXPLANATION ===
+This game is played on a 7 tile board with no ports. The 7 tiles are arranged in a hexagon around a central tile. 
+
+SPATIAL RELATIONSHIPS:
+- Tiles: Identified by cube coordinates (x,y,z) where x+y+z=0
+- Nodes: Intersection points between tiles, identified by integer IDs (0-53)
+- Edges/Roads: Connections between two nodes, represented as (node_id1, node_id2)
+- Each tile has 6 nodes at its corners and 6 edges connecting those nodes
+- Adjacent tiles share nodes and edges
+- Ports are located on specific edges facing the ocean
+
+=== BOARD LAYOUT ===
+
+--- HEXAGON TILES ---
+Tile (-1, 0, 1) (ID 3): ORE with number 4 | corner nodes: [3, 4, 12, 13, 14, 15]
+Tile (-1, 1, 0) (ID 4): WOOD with number 10 | corner nodes: [4, 5, 15, 16, 17, 18]
+Tile (0, -1, 1) (ID 2): WHEAT with number 9 | corner nodes: [2, 3, 9, 10, 11, 12]
+Tile (0, 0, 0) (ID 0): WHEAT with number 8 | corner nodes: [0, 1, 2, 3, 4, 5]
+Tile (0, 1, -1) (ID 5): BRICK with number 6 | corner nodes: [0, 5, 16, 19, 20, 21]
+Tile (1, -1, 0) (ID 1): DESERT (no resources) | corner nodes: [1, 2, 6, 7, 8, 9]
+Tile (1, 0, -1) (ID 6): SHEEP with number 3 | corner nodes: [0, 1, 6, 20, 22, 23]
+
+--- PORTS ---
+This map has no ports.
+
+--- NODES (Intersection Points) ---
+Node 0: neighbors: [1, 5, 20] | adjacent to tile IDs: 0, 5, 6
+Node 1: neighbors: [0, 2, 6] | adjacent to tile IDs: 0, 1, 6
+Node 2: neighbors: [1, 3, 9] | adjacent to tile IDs: 0, 1, 2
+Node 3: neighbors: [2, 4, 12] | adjacent to tile IDs: 0, 2, 3
+Node 4: neighbors: [3, 5, 15] | adjacent to tile IDs: 0, 3, 4
+Node 5: neighbors: [0, 4, 16] | adjacent to tile IDs: 0, 4, 5
+Node 6: neighbors: [1, 7, 23] | adjacent to tile IDs: 1, 6
+Node 7: neighbors: [6, 8, 24] | adjacent to tile IDs: 1
+Node 8: neighbors: [7, 9, 27] | adjacent to tile IDs: 1
+Node 9: neighbors: [2, 8, 10] | adjacent to tile IDs: 1, 2
+Node 10: neighbors: [9, 11, 29] | adjacent to tile IDs: 2
+Node 11: neighbors: [10, 12, 32] | adjacent to tile IDs: 2
+Node 12: neighbors: [3, 11, 13] | adjacent to tile IDs: 2, 3
+Node 13: neighbors: [12, 14, 34] | adjacent to tile IDs: 3
+Node 14: neighbors: [13, 15, 37] | adjacent to tile IDs: 3
+Node 15: neighbors: [4, 14, 17] | adjacent to tile IDs: 3, 4
+Node 16: neighbors: [5, 18, 21] | adjacent to tile IDs: 4, 5
+Node 17: neighbors: [15, 18, 39] | adjacent to tile IDs: 4
+Node 18: neighbors: [16, 17, 40] | adjacent to tile IDs: 4
+Node 19: neighbors: [20, 21, 46] | adjacent to tile IDs: 5
+Node 20: neighbors: [0, 19, 22] | adjacent to tile IDs: 5, 6
+Node 21: neighbors: [16, 19, 43] | adjacent to tile IDs: 5
+Node 22: neighbors: [20, 23, 49] | adjacent to tile IDs: 6
+Node 23: neighbors: [6, 22, 52] | adjacent to tile IDs: 6

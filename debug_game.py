@@ -6,8 +6,8 @@ Prints the natural language game state at each turn.
 
 from catanatron import Game, Color, RandomPlayer
 from catanatron.models.map import MINI_MAP_TEMPLATE, CatanMap
-from debug_player import create_debug_player
-from game_convert import game_to_natural_language
+from players.debug_player import create_debug_player
+from util.game_convert import game_to_natural_language
 
 
 def debug_game():
