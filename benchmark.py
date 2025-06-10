@@ -34,7 +34,7 @@ console = Console()
 
 # --- Benchmark Configuration ---
 PROMPTING_STRATEGIES = ["basic", "strategy", "search", "rules"]
-NUM_GAMES_PER_MATCH = 100
+NUM_GAMES_PER_MATCH = 5
 V_POINTS_TO_WIN = 10
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
@@ -236,19 +236,19 @@ def main():
     # --- Create all match and game tasks ---
     matchups = []
     # 1. LLM vs LLM
-    # console.print("\n[bold green]Preparing LLM vs LLM matches...[/bold green]")
-    # llm_pairs = list(combinations(llm_variants, 2))
-    # for p1_variant, p2_variant in llm_pairs:
-    #     p1_factory = llm_factories[p1_variant]
-    #     p2_factory = llm_factories[p2_variant]
-    #     matchups.append((p1_factory, p2_factory))
+    console.print("\n[bold green]Preparing LLM vs LLM matches...[/bold green]")
+    llm_pairs = list(combinations(llm_variants, 2))
+    for p1_variant, p2_variant in llm_pairs:
+        p1_factory = llm_factories[p1_variant]
+        p2_factory = llm_factories[p2_variant]
+        matchups.append((p1_factory, p2_factory))
 
     # 2. LLM vs Bots
-    # console.print("[bold green]Preparing LLM vs Bot matches...[/bold green]")
-    # for variant in llm_variants:
-    #     llm_factory = llm_factories[variant]
-    #     for bot_name, bot_factory in bot_factories.items():
-    #         matchups.append((llm_factory, bot_factory))
+    console.print("[bold green]Preparing LLM vs Bot matches...[/bold green]")
+    for variant in llm_variants:
+        llm_factory = llm_factories[variant]
+        for bot_name, bot_factory in bot_factories.items():
+            matchups.append((llm_factory, bot_factory))
 
     # 3. Bot vs Bot
     console.print("[bold green]Preparing Bot vs Bot matches...[/bold green]")
