@@ -228,20 +228,20 @@ def main():
         for variant in llm_variants
     }
     bot_factories = {
-        "AlphaBeta": get_player_factory("ab"),
-        "Random": get_player_factory("random"),
+        # "AlphaBeta": get_player_factory("ab"),
+        # "Random": get_player_factory("random"),
         "ValueFunction": get_player_factory("value"),
     }
 
     # --- Create all match and game tasks ---
     matchups = []
     # 1. LLM vs LLM
-    console.print("\n[bold green]Preparing LLM vs LLM matches...[/bold green]")
-    llm_pairs = list(combinations(llm_variants, 2))
-    for p1_variant, p2_variant in llm_pairs:
-        p1_factory = llm_factories[p1_variant]
-        p2_factory = llm_factories[p2_variant]
-        matchups.append((p1_factory, p2_factory))
+    # console.print("\n[bold green]Preparing LLM vs LLM matches...[/bold green]")
+    # llm_pairs = list(combinations(llm_variants, 2))
+    # for p1_variant, p2_variant in llm_pairs:
+    #     p1_factory = llm_factories[p1_variant]
+    #     p2_factory = llm_factories[p2_variant]
+    #     matchups.append((p1_factory, p2_factory))
 
     # 2. LLM vs Bots
     console.print("[bold green]Preparing LLM vs Bot matches...[/bold green]")
@@ -251,13 +251,13 @@ def main():
             matchups.append((llm_factory, bot_factory))
 
     # 3. Bot vs Bot
-    console.print("[bold green]Preparing Bot vs Bot matches...[/bold green]")
-    bot_pairs = list(combinations(bot_factories.keys(), 2))
-    for p1_name, p2_name in bot_pairs:
-        p1_factory = bot_factories[p1_name]
-        p2_factory = bot_factories[p2_name]
-        matchups.append((p1_factory, p2_factory))
-
+    # console.print("[bold green]Preparing Bot vs Bot matches...[/bold green]")
+    # bot_pairs = list(combinations(bot_factories.keys(), 2))
+    # for p1_name, p2_name in bot_pairs:
+    #     p1_factory = bot_factories[p1_name]
+    #     p2_factory = bot_factories[p2_name]
+    #     matchups.append((p1_factory, p2_factory))
+    #
     game_tasks = []
     for p1_factory, p2_factory in matchups:
         for i in range(NUM_GAMES_PER_MATCH):
@@ -466,4 +466,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
