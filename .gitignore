@@ -1,5 +1,6 @@
 .env
 *.log
+catanatron/
 board/
 logs/
 

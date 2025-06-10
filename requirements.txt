@@ -1,0 +1,14 @@
+requests>=2.31.0
+python-dotenv>=1.1.0
+openai>=1.84.0
+streamlit>=1.45.1
+pillow>=11.2.1
+matplotlib>=3.10.3
+choix
+numpy
+seaborn
+rich
+
+# The catanatron library is installed directly from GitHub via uv in pyproject.toml
+# If you are not using uv, you can install it using pip:
+# pip install git+https://github.com/bcollazo/catanatron.git 
