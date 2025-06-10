@@ -4,7 +4,7 @@ import numpy as np
 
 from catanatron import Color, RandomPlayer, Game
 from catanatron.state import State
-from catanatron.models.map import LandTile, Port, PORT_DIRECTION_TO_NODEREFS
+from catanatron.models.map import LandTile, Port, PORT_DIRECTION_TO_NODEREFS, MINI_MAP_TEMPLATE, CatanMap
 from catanatron.models.enums import SETTLEMENT, CITY, NodeRef
 from catanatron.models.coordinate_system import Direction
 
@@ -143,3 +143,13 @@ if __name__ == '__main__':
 
     plot_board(game.state, 'catan_board.png')
     print("Board image saved to catan_board.png")
+
+    game = Game(players, catan_map=CatanMap.from_template(MINI_MAP_TEMPLATE))
+    
+    # Play a few moves to get a more interesting board
+    for _ in range(10):
+        if not game.winning_color():
+            game.play_tick()
+
+    plot_board(game.state, 'mini_catan_board.png')
+    print("Mini board image saved to mini_catan_board.png")
