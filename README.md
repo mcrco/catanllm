@@ -49,7 +49,20 @@ The script will create a new directory in `benchmarks/` with a timestamp, e.g., 
 -   `benchmark-results.json`: A JSON file with the detailed results of all games.
 -   A `boards/` subdirectory with PNG images of the final board state for each game.
 
-### 4. Generating Results and Figures
+### Logging Games and Watching Replays
+
+The ```log_game.py``` script logs games to the ```logs/``` directory. It contains a text log along with turn-by-turn information about the 
+LLM responses, including the reasoning, notes, available actions, game state, and board. Some examples of games played by Gemini 2.5 Flash 
+against the ValueFunction bot are contained in the replays/ folder by default. You can visualize the LLM player decisions for a logged game 
+by copy pasting the log folder(s) for the games you want to see into the ```replays/``` folder and then running 
+
+```bash
+streamlit run replay.py
+```
+
+Click on the provided link for a web app UI.
+
+### 5. Generating Results and Figures
 
 After the benchmark is complete, you can generate summary figures and ratings.
 
@@ -64,7 +77,7 @@ After the benchmark is complete, you can generate summary figures and ratings.
 2.  **Run the analysis script:** Execute the `generate_all_results.py` script:
 
     ```bash
-    python generate_all_results.py
+    uv run generate_all_results.py
     ```
 
     This will generate a `gemini-2.5-flash.png` file in the `figures/` directory, containing plots that summarize the benchmark results. You may want to update the output filename in `generate_all_results.py` to reflect the model you used.
