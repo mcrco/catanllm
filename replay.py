@@ -113,14 +113,14 @@ if selected_game:
             tabs = st.tabs(tab_titles)
             
             details = {
-                "Reasoning": turn_data.get('reasoning', 'No reasoning replayged.'),
-                "Response": turn_data.get('response', 'No response replayged.'),
-                "Available Actions": turn_data.get('actions', 'No actions replayged.'),
-                "Game State": turn_data.get('game_state', 'No game state replayged.')
+                "Reasoning": turn_data.get('reasoning', 'No reasoning recorded.'),
+                "Response": turn_data.get('response', 'No response recorded.'),
+                "Available Actions": turn_data.get('actions', 'No actions recorded.'),
+                "Game State": turn_data.get('game_state', 'No game state recorded.')
             }
 
             for tab, title in zip(tabs, tab_titles):
                 with tab:
-                    st.text_area(title, details[title], height=400, key=f"text_{title}_{st.session_state.turn_index}")
+                    st.text_area(title, details[title], height=600, key=f"text_{title}_{st.session_state.turn_index}")
 else:
     st.info("Select a game from the sidebar to begin.") 

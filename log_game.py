@@ -8,6 +8,7 @@ import logging
 from datetime import datetime
 from catanatron import Game, Color, RandomPlayer
 from catanatron.players.value import ValueFunctionPlayer
+from catanatron.players.weighted_random import WeightedRandomPlayer
 from catanatron.players.minimax import AlphaBetaPlayer
 from catanatron.models.map import MINI_MAP_TEMPLATE, BASE_MAP_TEMPLATE, CatanMap
 from players.llm_player import LLMPlayer
@@ -43,6 +44,13 @@ def create_vf_player(color: Color) -> ValueFunctionPlayer:
     return player
 
 
+def create_weighted_random_player(color: Color) -> WeightedRandomPlayer:
+    """Factory function for creating a WeightedRandomPlayer."""
+    player = WeightedRandomPlayer(color)
+    player.name = "WeightedRandom"
+    return player
+
+
 def create_random_player(color: Color) -> RandomPlayer:
     """Factory function for creating a RandomPlayer."""
     player = RandomPlayer(color)
@@ -54,6 +62,7 @@ PLAYER_FACTORIES = {
     "alphabeta": create_ab_player,
     "random": create_random_player,
     "value": create_vf_player,
+    "weighted": create_weighted_random_player,
 }
 
 
@@ -247,7 +256,7 @@ if __name__ == "__main__":
                 "type": "llm",
                 "config": "gemini",
                 "thinking": False,
-                "prompt": "basic",
+                "prompt": "rules",
             },
             {
                 "type": "value",
@@ -256,7 +265,7 @@ if __name__ == "__main__":
         "max_turns": None,
         "mini_map": True,
         "vps": 10,
-        "game_name": "gemini-no_think-basic",
+        "game_name": "gemini-no_think-rules",
     }
 
     run_game(**config)
