@@ -16,6 +16,7 @@ from itertools import combinations
 from catanatron import Game, Color, RandomPlayer
 from catanatron.models.player import Player
 from catanatron.players.minimax import AlphaBetaPlayer
+from catanatron.players.value import ValueFunctionPlayer
 from catanatron.models.map import BASE_MAP_TEMPLATE, MINI_MAP_TEMPLATE, CatanMap
 from catanatron.state_functions import get_actual_victory_points
 from players.llm_player import LLMPlayer
@@ -37,8 +38,8 @@ NUM_GAMES_PER_MATCH = 5
 V_POINTS_TO_WIN = 10
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-MODEL = "google/gemini-2.5-flash-preview-05-20"
-# MODEL = "qwen/qwen3-30b-a3b"
+# MODEL = "google/gemini-2.5-flash-preview-05-20"
+MODEL = "qwen/qwen3-30b-a3b"
 MAX_TOKENS = 8192
 USE_MINI_MAP = True
 # ---
@@ -75,6 +76,12 @@ def create_random_player(color: Color) -> RandomPlayer:
     player.name = "Random"
     return player
 
+def create_vf_player(color: Color) -> ValueFunctionPlayer:
+    """Factory function for creating a ValueFunctionPlayer."""
+    player = ValueFunctionPlayer(color)
+    player.name = "ValueFunction"
+    return player
+
 def get_player_factory(player_type: str, prompt: str = None, thinking: bool = True, use_mini_map: bool = False) -> Callable[[Color], Player]:
     """Get a factory function for a given player type."""
     if player_type == 'llm':
@@ -85,6 +92,8 @@ def get_player_factory(player_type: str, prompt: str = None, thinking: bool = Tr
         return create_ab_player
     elif player_type == 'random':
         return create_random_player
+    elif player_type == 'value':
+        return create_vf_player
     raise ValueError(f"Unknown player type: {player_type}")
 
 def count_tokens(text: str) -> int:
@@ -183,6 +192,7 @@ def main():
     bot_factories = {
         "AlphaBeta": get_player_factory("ab"),
         "Random": get_player_factory("random"),
+        "ValueFunction": get_player_factory("value"),
     }
 
     # --- Create all match and game tasks ---
@@ -201,6 +211,14 @@ def main():
         llm_factory = llm_factories[variant]
         for bot_name, bot_factory in bot_factories.items():
             matchups.append((llm_factory, bot_factory))
+
+    # 3. Bot vs Bot
+    console.print("[bold green]Preparing Bot vs Bot matches...[/bold green]")
+    bot_pairs = list(combinations(bot_factories.keys(), 2))
+    for p1_name, p2_name in bot_pairs:
+        p1_factory = bot_factories[p1_name]
+        p2_factory = bot_factories[p2_name]
+        matchups.append((p1_factory, p2_factory))
 
     game_tasks = []
     for p1_factory, p2_factory in matchups:
