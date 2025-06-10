@@ -43,7 +43,7 @@ class LLMPlayer(Player):
             **kwargs: Additional keyword arguments for the LLMWrapper.
         """
         super().__init__(color)
-        if 'gemini' in model.lower() and thinking:
+        if 'gemini' in model.lower() and 'thinking' not in model.lower() and thinking:
             model = f"{model}:thinking"
         self.model = model
         self.llm_wrapper = LLMWrapper(
@@ -55,6 +55,8 @@ class LLMPlayer(Player):
             max_tokens=max_tokens,
             use_mini_map=use_mini_map,
         )
+        if 'qwen' in model.lower() and not thinking:
+            model = f"{model}:no_think"
         self.name = name or f"LLM-{color}"
         self.prompt = prompt
         self.log = []

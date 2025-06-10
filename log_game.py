@@ -6,13 +6,50 @@ Example usage of the LLM Player for Catan.
 import os
 import logging
 from datetime import datetime
+from functools import partial
 from catanatron import Game, Color, RandomPlayer
+from catanatron.models.player import Player
 from catanatron.players.minimax import AlphaBetaPlayer
 from catanatron.models.map import MINI_MAP_TEMPLATE, BASE_MAP_TEMPLATE, CatanMap
 from players.llm_player import LLMPlayer
 from util.game_convert import game_to_natural_language, format_playable_actions
 from visualization.board_plot import plot_board
 import json
+
+
+LLM_CONFIGS = {
+    "gemini": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "model": "google/gemini-2.5-flash-preview-05-20",
+        "name": "gemini2.5-flash-5-20",
+        "thinking": False,
+    },
+    "qwen3": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "model": "qwen/qwen3-235b-a22b",
+        "name": "qwen3-235b-a22b",
+        "thinking": True,
+    },
+}
+
+def create_ab_player(color: Color) -> AlphaBetaPlayer:
+    """Factory function for creating an AlphaBetaPlayer."""
+    player = AlphaBetaPlayer(color)
+    player.name = "AlphaBeta"
+    return player
+
+
+def create_random_player(color: Color) -> RandomPlayer:
+    """Factory function for creating a RandomPlayer."""
+    player = RandomPlayer(color)
+    player.name = "Random"
+    return player
+
+
+PLAYER_FACTORIES = {
+    "alphabeta": create_ab_player,
+    "random": create_random_player,
+}
 
 
 def setup_logging(game_name: str = None):
@@ -150,34 +187,32 @@ class LoggingGame(Game):
         return result
 
 
-def example_openrouter_game(
-    max_turns=None, num_players=2, mini_map=False, vps=10, game_name=None, thinking=True
+def run_game(
+    player_types: list[str], max_turns=None, mini_map=False, vps=10, game_name=None
 ):
     """
-    Example game with OpenRouter LLM player vs random players.
+    Example game with configurable players.
     """
     # Set up logging
     logger = setup_logging(game_name)
 
     # Create players
-    print(thinking)
-    players = [
-        LLMPlayer(
-            color=Color.RED,
-            api_key=os.getenv("OPENROUTER_API_KEY"),
-            base_url="https://openrouter.ai/api/v1",
-            model="google/gemini-2.5-flash-preview-05-20",
-            name=f"gemini2.5-flash-5-20:{'thinking' if thinking else ''}",
-            # model="qwen/qwen3-30b-a3b",
-            # name=f"qwen3-30b-a3b:{'thinking' if thinking else 'no-think'}",
-            prompt="basic",
-            thinking=thinking,
-        ),
-    ]
+    players = []
+    colors = [Color.RED, Color.BLUE, Color.WHITE, Color.ORANGE]
+    for i, player_spec in enumerate(player_types):
+        if i >= len(colors):
+            raise ValueError(f"Maximum number of players is {len(colors)}")
 
-    colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
-    for i in range(num_players - 1):
-        players.append(AlphaBetaPlayer(colors[i]))
+        if player_spec["type"] in PLAYER_FACTORIES:
+            player_factory = PLAYER_FACTORIES[player_spec["type"]]
+            players.append(player_factory(color=colors[i]))
+        elif player_spec['type'] == "llm":
+            llm_config = LLM_CONFIGS[player_spec["config"]]
+            llm_config["thinking"] = player_spec["thinking"]
+            player = LLMPlayer(color=colors[i], **llm_config)
+            players.append(player)
+        else:
+            raise ValueError(f"Unknown player type: {player_spec['type']}")
 
     # Create and play game with logging
     game = LoggingGame(
@@ -190,54 +225,9 @@ def example_openrouter_game(
     )
 
     print("Starting game...")
+    print(f"Players: {[p.name for p in players]}")
     if max_turns:
         print(f"Max turns: {max_turns}")
-    winning_color = game.play()
-    print(f"Game finished! Winner: {winning_color}")
-
-    return winning_color
-
-
-def example_vllm_game(
-    max_turns=None, num_players=2, mini_map=False, vps=10, game_name=None
-):
-    """
-    Example game with vLLM player vs random players.
-    """
-    print("=== vLLM Local Player Example ===")
-
-    # Set up logging
-    logger = setup_logging(game_name)
-
-    # Create players
-    players = [
-        LLMPlayer(
-            color=Color.RED,
-            base_url="http://localhost:8000/v1",
-            model="Qwen/Qwen3-1.7B",  # Use default model from vLLM server
-            name="Qwen-3-1.7B",
-            max_tokens=8192,
-        ),
-    ]
-
-    colors = [Color.BLUE, Color.WHITE, Color.ORANGE]
-    for i in range(num_players - 1):
-        players.append(RandomPlayer(colors[i]))
-
-    # Create and play game with logging
-    game = LoggingGame(
-        players,
-        logger,
-        max_turns,
-        mini_map=mini_map,
-        vps_to_win=vps,
-        game_name=game_name,
-    )
-
-    print("Starting game...")
-    if max_turns:
-        print(f"Max turns: {max_turns}")
-    print("Game state and LLM outputs will be logged to openrouter-output.log")
     winning_color = game.play()
     print(f"Game finished! Winner: {winning_color}")
 
@@ -245,49 +235,21 @@ def example_vllm_game(
 
 
 if __name__ == "__main__":
-    import argparse
-# 
-    parser = argparse.ArgumentParser(description="LLM Catan Player Examples")
-    parser.add_argument(
-        "--mode",
-        choices=["openrouter", "vllm", "benchmark"],
-        default="openrouter",
-        help="Which example to run",
-    )
-    parser.add_argument("--games", type=int, default=1, help="Number of games to run")
-    parser.add_argument(
-        "--vps", type=int, default=10, help="Number of victory points to win"
-    )
-    parser.add_argument(
-        "--max-turns", type=int, default=None, help="Maximum number of turns per game"
-    )
-    parser.add_argument("--num-players", type=int, default=2, help="Number of players")
-    parser.add_argument("--mini-map", action="store_true", help="Use mini map")
-    parser.add_argument("--game-name", type=str, default=None, help="Name of the game")
-    parser.add_argument("--no_think", action="store_true", help="Whether to use thinking")
-    args = parser.parse_args()
+    config = {
+        "players": [
+            {
+                "type": "llm",
+                "config": "gemini",
+                "thinking": True,
+            },
+            {
+                "type": "alphabeta",
+            },
+        ],
+        "max_turns": None,
+        "mini_map": True,
+        "vps": 10,
+        "game_name": "test",
+    }
 
-    try:
-        if args.mode == "openrouter":
-            print(args.no_think)
-            if args.games == 1:
-                example_openrouter_game(
-                    args.max_turns,
-                    args.num_players,
-                    args.mini_map,
-                    args.vps,
-                    args.game_name,
-                    thinking=not args.no_think,
-                )
-        elif args.mode == "vllm":
-            if args.games == 1:
-                example_vllm_game(
-                    args.max_turns,
-                    args.num_players,
-                    args.mini_map,
-                    args.vps,
-                    args.game_name,
-                )
-
-    except Exception as e:
-        print(f"Error: {e}")
+    run_game(**config)
