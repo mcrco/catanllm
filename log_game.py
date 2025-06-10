@@ -6,9 +6,8 @@ Example usage of the LLM Player for Catan.
 import os
 import logging
 from datetime import datetime
-from functools import partial
 from catanatron import Game, Color, RandomPlayer
-from catanatron.models.player import Player
+from catanatron.players.value import ValueFunctionPlayer
 from catanatron.players.minimax import AlphaBetaPlayer
 from catanatron.models.map import MINI_MAP_TEMPLATE, BASE_MAP_TEMPLATE, CatanMap
 from players.llm_player import LLMPlayer
@@ -22,13 +21,11 @@ LLM_CONFIGS = {
         "base_url": "https://openrouter.ai/api/v1",
         "model": "google/gemini-2.5-flash-preview-05-20",
         "name": "gemini2.5-flash-5-20",
-        "thinking": False,
     },
     "qwen3": {
         "base_url": "https://openrouter.ai/api/v1",
         "model": "qwen/qwen3-235b-a22b",
         "name": "qwen3-235b-a22b",
-        "thinking": True,
     },
 }
 
@@ -36,6 +33,13 @@ def create_ab_player(color: Color) -> AlphaBetaPlayer:
     """Factory function for creating an AlphaBetaPlayer."""
     player = AlphaBetaPlayer(color)
     player.name = "AlphaBeta"
+    return player
+
+
+def create_vf_player(color: Color) -> ValueFunctionPlayer:
+    """Factory function for creating an ValueFunctionPlayer."""
+    player = ValueFunctionPlayer(color)
+    player.name = "ValueFunction"
     return player
 
 
@@ -49,6 +53,7 @@ def create_random_player(color: Color) -> RandomPlayer:
 PLAYER_FACTORIES = {
     "alphabeta": create_ab_player,
     "random": create_random_player,
+    "value": create_vf_player,
 }
 
 
@@ -208,6 +213,7 @@ def run_game(
             players.append(player_factory(color=colors[i]))
         elif player_spec['type'] == "llm":
             llm_config = LLM_CONFIGS[player_spec["config"]]
+            llm_config["prompt"] = player_spec["prompt"]
             llm_config["thinking"] = player_spec["thinking"]
             player = LLMPlayer(color=colors[i], **llm_config)
             players.append(player)
@@ -236,20 +242,21 @@ def run_game(
 
 if __name__ == "__main__":
     config = {
-        "players": [
+        "player_types": [
             {
                 "type": "llm",
                 "config": "gemini",
-                "thinking": True,
+                "thinking": False,
+                "prompt": "basic",
             },
             {
-                "type": "alphabeta",
+                "type": "value",
             },
         ],
         "max_turns": None,
         "mini_map": True,
         "vps": 10,
-        "game_name": "test",
+        "game_name": "gemini-no_think-basic",
     }
 
     run_game(**config)
